@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Meetingkosten</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<style>
+body {
+  margin-bottom: 100px;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 770px;
+  }
+}
+
+header {
+  text-align: center;
+}
+h1 {
+  font-size: 3em;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+#ergebnis {
+  padding: 10px 20px;
+  background-color: white;
+  border-top: 10px solid #f2f2f2;
+  border-bottom: 10px solid #f2f2f2;
+}
+#ergebnis_wert {
+  color: #4285f4;
+  font-weight: 500;
+  font-size: xx-large;
+}
+</style>
+</head>
+<body>
+  <header class="mt-4">
+    <h1 itemprop="name">Wie teuer war mein Meeting?</h1>
+  </header>
+
+  <div id="container" class="container">
+    <hr>
+    <p>Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
+	<p>Das Durchschnittsgehalt ist im Programm mit 4000€ brutto monatlich festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
+	<hr>
+	<p>💶 Durchschnittliches Monatsgehalt der Teilnehmer (brutto)<input value="4000" class="form-control" type="search" id="dgehalt" autocomplete="off" spellcheck="false"></p>
+	<hr>
+    <p><b>⏰ Meeting-Länge</b><input class="form-control" type="search" id="laenge" placeholder="In Stunden (bspw. 1.7)" autocomplete="off" spellcheck="false"></p>
+    <p><b>👨‍💼👩‍💼 Teilnehmeranzahl</b><input class="form-control" type="search" id="teilnehmer" placeholder="Ganzzahlen" autocomplete="off" spellcheck="false"></p>
+    <hr>
+	
+	<div id="zusammenfassung">
+	</div>
+	</br>
+    <div id="ergebnis">
+      <div id="ergebnis_wert">0 €</div>
+    </div>
+	</br>
+	<div id="bierwert">
+	</div>
+	<hr>
+	<p><b>🤝 URL zum Teilen</b><input class="form-control" type="search" id="myurl" placeholder="" autocomplete="off" spellcheck="false"></p>
+    <hr>
+    <ul>
+      <li>Made by <a href="https://github.com/roflrolle">roflrolle</a> with ❤ & 🍺</li>
+	</ul>
+  </div>
+
+<script>
+(new URL(window.location.href)).searchParams.forEach((x, y) => document.getElementById(y).value = x);
+
+const laenge = document.getElementById("laenge");
+const myurl = document.getElementById("myurl");
+const meetingtext=document.getElementById("zusammenfassung");
+const teilnehmer = document.getElementById("teilnehmer");
+const gehaltfeld=document.getElementById("dgehalt");
+var durchschnitt = gehaltfeld.value;
+const ergebniswert= document.getElementById("ergebnis_wert");
+bierkosten=4;
+bierkostencount=0;
+
+myurl.value=window.location.href
+
+update_uri();
+
+function update_uri(){
+
+	var durchschnitt = gehaltfeld.value
+	var euro=null;
+	var stundenlohn=null;
+	stundenlohn=(3*durchschnitt)/13/40;
+	stundenlohn=Math.round(stundenlohn);
+	
+	if (laenge.value !== "" && teilnehmer.value !== "") {
+		euro=stundenlohn*laenge.value*teilnehmer.value
+		zusammenfassung.textContent = "Ihr Meeting mit "+teilnehmer.value+" Teilnehmern hat in "+laenge.value+" Stunden folgende Kosten verursacht:";
+		bierkostencount=Math.round((euro/teilnehmer.value)/bierkosten)
+		bierwert.textContent="Dafür hätten Sie jedem Teilnehmer und sich selbst ca. "+bierkostencount+" Bier spendieren können 🍺"
+		myurl.value=window.location.href+"?&laenge="+laenge.value+"&dgehalt="+gehaltfeld.value+"&teilnehmer="+teilnehmer.value
+	}
+	else {
+		euro="0";
+	}
+	
+	ergebniswert.textContent ="ca. "+ euro + " €";
+	
+}
+
+zusammenfassung.textContent = "! Tragen sie oben Werte in die Felder ein !";
+
+teilnehmer.addEventListener("input", update_uri);
+laenge.addEventListener("input", update_uri);
+gehaltfeld.addEventListener("input", update_uri);
+
+</script>
+</body>
+</html>
