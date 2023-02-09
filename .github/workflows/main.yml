@@ -12,6 +12,8 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         log-level: verbose
-        server: sftp://ssh.strato.de:22
+        server: ssh.strato.de
         username: sftp_meeting@meeting.fail
         password: ${{ secrets.TEST }}
+        protocol: ftps-legacy
+        port: 22
