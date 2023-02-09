@@ -11,6 +11,7 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
+        log-level: debug
         server: ssh.strato.de
         username: sftp_meeting@meeting.fail
         password: ${{ secrets.TEST }}
