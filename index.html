@@ -1,63 +1,75 @@
-
 <!doctype html>
 <html lang="en">
+
 <head>
   <title>meeting.fail</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-<style>
-[data-theme="dark"] {
-  --background-color: #282828;
-  --text-color: #ffffff;
-}
-[data-theme="light"] {
-  --background-color: #ffffff ;
-  --text-color: #282828;
-}
-body {
-  margin-bottom: 50em;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-hr.new1 {
-  border-top: 1px solid #b3b3b3;
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 50vw;
-  }
-}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <style>
+    [data-theme="dark"] {
+      --background-color: #282828;
+      --text-color: #ffffff;
+    }
 
-header {
-  text-align: center;
-}
-h1 {
-  font-size: 3em;
-  font-weight: 700;
-}
-h2 {
-  font-size: 1.5em;
-  font-weight: 400;
-}
-input.form-control {
-	background-color: var(--background-color);
-	color: var(--text-color);
-}
-input.form-control:focus {
-	background-color: var(--background-color);
-	color: var(--text-color);
-}
-#ergebnis {
-  padding: 1vw 2vw;
-}
-#ergebnis_wert {
-  color: #4285f4;
-  font-weight: 500;
-  font-size: xx-large;
-}
-</style>
+    [data-theme="light"] {
+      --background-color: #ffffff;
+      --text-color: #282828;
+    }
+
+    body {
+      margin-bottom: 50em;
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    hr.new1 {
+      border-top: 1px solid #b3b3b3;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: 50vw;
+      }
+    }
+
+    header {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      font-weight: 400;
+    }
+
+    input.form-control {
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    input.form-control:focus {
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    #ergebnis {
+      padding: 1vw 2vw;
+    }
+
+    #ergebnis_wert {
+      color: #4285f4;
+      font-weight: 500;
+      font-size: xx-large;
+    }
+  </style>
 </head>
+
 <body>
   <header class="mt-4">
     <h1 itemprop="name" id="headline">Meeting.fail 💬</h1>
@@ -65,193 +77,199 @@ input.form-control:focus {
   <div id="container" class="container">
     <hr class="new1">
     <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
-	<p id="subtitle2">Das Durchschnittsgehalt ist im Programm mit 4000€ brutto monatlich festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
-	<hr class="new1">
-	<p id="gehalttitle">💶 Durchschnittliches Monatsgehalt der Teilnehmer (brutto)</p><input value="4000" class="form-control" type="text" id="dgehalt">
-	</br>
-    <p id="laengetitle"><b>⏰ Meeting-Länge</b></p><input class="form-control" type="text" id="laenge" placeholder="In Stunden (bspw. 1.7)">
-	</br>
-    <p id="teilnehmertitle"><b>👨‍💼👩‍💼 Teilnehmeranzahl</b></p><input class="form-control" type="text" id="teilnehmer" placeholder="Ganzzahlen">
+    <p id="subtitle2">Das Durchschnittsgehalt ist im Programm mit 4000€ brutto monatlich
+      festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
     <hr class="new1">
-	
-	<div id="zusammenfassung">
-	</div>
+    <p id="gehalttitle">💶 Durchschnittliches Monatsgehalt der Teilnehmer (brutto)</p><input value="4000"
+      class="form-control" type="text" id="dgehalt">
+    </br>
+    <p id="laengetitle"><b>⏰ Meeting-Länge</b></p><input class="form-control" type="text" id="laenge"
+      placeholder="In Stunden (bspw. 1.7)">
+    </br>
+    <p id="teilnehmertitle"><b>👨‍💼👩‍💼 Teilnehmeranzahl</b></p><input class="form-control" type="text"
+      id="teilnehmer" placeholder="Ganzzahlen">
+    <hr class="new1">
+
+    <div id="zusammenfassung">
+    </div>
     <div id="ergebnis">
       <div id="ergebnis_wert">0 €</div>
     </div>
-	<div id="bierwert">
-	</div>
-	<hr class="new1">
-	<p id="sharingtext"><b>🤝 URL zum Teilen</b></p><input onClick="this.select();" class="form-control" type="search" id="myurl" placeholder="" autocomplete="off" spellcheck="false">
+    <div id="bierwert">
+    </div>
+    <hr class="new1">
+    <p id="sharingtext"><b>🤝 URL zum Teilen</b></p><input onClick="this.select();" class="form-control" type="search"
+      id="myurl" placeholder="" autocomplete="off" spellcheck="false">
     <hr>
     <ul>
       <li>Made by <a href="https://github.com/roflrolle">roflrolle</a> with ❤ & 🍺</li>
-	  <li><button type="button" class="btn btn-light" id="theme-switcher">☀ Light Mode</button></li>
-	</ul>
-	<hr>
-	
+      <li><button type="button" class="btn btn-light" id="theme-switcher">☀ Light Mode</button></li>
+    </ul>
+    <hr>
+
   </div>
 
-<script>
-// Credits to https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
-function getFirstBrowserLanguage() {
-    var nav = window.navigator,
-    browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
-    i,
-    language;
+  <script>
+    // Credits to https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
+    function getFirstBrowserLanguage() {
+      var nav = window.navigator,
+        browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
+        i,
+        language;
 
-    // support for HTML 5.1 "navigator.languages"
-    if (Array.isArray(nav.languages)) {
-      for (i = 0; i < nav.languages.length; i++) {
-        language = nav.languages[i];
+      // support for HTML 5.1 "navigator.languages"
+      if (Array.isArray(nav.languages)) {
+        for (i = 0; i < nav.languages.length; i++) {
+          language = nav.languages[i];
+          if (language && language.length) {
+            return language;
+          }
+        }
+      }
+
+      // support for other well known properties in browsers
+      for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+        language = nav[browserLanguagePropertyKeys[i]];
         if (language && language.length) {
           return language;
         }
       }
-    }
 
-    // support for other well known properties in browsers
-    for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
-      language = nav[browserLanguagePropertyKeys[i]];
-      if (language && language.length) {
-        return language;
+      return null;
+    };
+
+    // Credits for Darmoke to https://www.pullrequest.com/blog/how-to-implement-dark-mode-with-css-js/
+    // Wait for document to load
+    document.addEventListener("DOMContentLoaded", function (event) {
+      document.documentElement.setAttribute("data-theme", "dark");
+
+      // Get our button switcher
+      var themeSwitcher = document.getElementById("theme-switcher");
+
+      // When our button gets clicked
+      themeSwitcher.onclick = function () {
+        // Get the current selected theme, on the first run
+        // it should be `light`
+        var currentTheme = document.documentElement.getAttribute("data-theme");
+
+        // Switch between `dark` and `light`
+        var switchToTheme = currentTheme === "dark" ? "light" : "dark"
+
+        // Set our currenet theme to the new one
+        document.documentElement.setAttribute("data-theme", switchToTheme);
+
+        if (switchToTheme === "dark") {
+          console.log(switchToTheme);
+          themeSwitcher.innerHTML = "☀ Light Mode";
+        }
+        if (switchToTheme === "light") {
+          console.log(switchToTheme);
+          themeSwitcher.innerHTML = "🌙 Dark Mode ";
+        }
       }
+    });
+    (new URL(window.location.href)).searchParams.forEach((x, y) => document.getElementById(y).value = x);
+
+    var userLang = getFirstBrowserLanguage();
+
+    const english = [
+      ["headline", "How expensive was my Meeting?"],
+      ["subtitle1", "This website calculates the meetings costs of your meeting based on the average income."],
+      ["subtitle2", "The average income is set to 4000€ monthly in this program.</br><i>(German average approx. 3975€)</i>"],
+      ["gehalttitle", "💶 Average monthly income of participants (gross)"],
+      ["laengetitle", "<b>⏰ Meeting-Length</b>"],
+      ["teilnehmertitle", "<b>👨‍💼👩‍💼 Participant count</b>"],
+      ["laenge", "in hours (e.g. 1.7)"],
+      ["teilnehmer", "integers"],
+      ["sharingtext", "🤝 URL for sharing"]
+    ];
+
+    function set_language_en() {
+      english.forEach(element => {
+
+        var myelement = document.getElementById(element[0]);
+        console.log(myelement);
+
+        if (myelement.nodeName === "P") {
+          myelement.innerHTML = element[1];
+        }
+        else if (myelement.nodeName === "INPUT") {
+          myelement.placeholder = element[1];
+        }
+        else if (myelement.nodeName === "H1") {
+          myelement.innerHTML = element[1];
+        }
+        else {
+
+        }
+      }
+      );
+
+      zusammenfassungdefaulttext = "! Please insert values in the input fields above !"
+      eurocatext = "e.g."
+      zusammenfassung1 = "Your meeting with "
+      zusammenfassung2 = " participants in  "
+      zusammenfassung3 = " hours cost:"
+      bier1 = "You could have spend this money on "
+      bier2 = " beer for you and every participant 🍺"
     }
 
-    return null;
-  };
+    var zusammenfassungdefaulttext = "! Tragen sie oben Werte in die Felder ein !"
+    var eurocatext = "ca."
+    var zusammenfassung1 = "Ihr Meeting mit "
+    var zusammenfassung2 = " Teilnehmern hat in "
+    var zusammenfassung3 = " Stunden folgende Kosten verursacht:"
+    var bier1 = "Dafür hätten Sie jedem Teilnehmer und sich selbst ca. "
+    var bier2 = " Bier spendieren können 🍺"
 
-// Credits for Darmoke to https://www.pullrequest.com/blog/how-to-implement-dark-mode-with-css-js/
-// Wait for document to load
-document.addEventListener("DOMContentLoaded", function(event) {
-document.documentElement.setAttribute("data-theme", "dark");
+    if (!userLang.startsWith("de")) {
+      set_language_en();
+    }
+    const laenge = document.getElementById("laenge");
+    const myurl = document.getElementById("myurl");
+    const meetingtext = document.getElementById("zusammenfassung");
+    const teilnehmer = document.getElementById("teilnehmer");
+    const gehaltfeld = document.getElementById("dgehalt");
+    var durchschnitt = gehaltfeld.value;
+    const ergebniswert = document.getElementById("ergebnis_wert");
 
-// Get our button switcher
-var themeSwitcher = document.getElementById("theme-switcher");
+    bierkosten = 4;
+    bierkostencount = 0;
 
-// When our button gets clicked
-themeSwitcher.onclick = function() {
-  // Get the current selected theme, on the first run
-  // it should be `light`
-  var currentTheme = document.documentElement.getAttribute("data-theme");
+    myurl.value = window.location.protocol + "//" + window.location.hostname
 
-  // Switch between `dark` and `light`
-  var switchToTheme = currentTheme === "dark" ? "light" : "dark"
+    function update_uri() {
 
-  // Set our currenet theme to the new one
-  document.documentElement.setAttribute("data-theme", switchToTheme);
-  
-  if(switchToTheme === "dark"){
-	console.log(switchToTheme);
-	themeSwitcher.innerHTML="☀ Light Mode";
-  }
-  if(switchToTheme === "light"){
-	console.log(switchToTheme);
-	themeSwitcher.innerHTML="🌙 Dark Mode ";
-  }
-}
-});
-(new URL(window.location.href)).searchParams.forEach((x, y) => document.getElementById(y).value = x);
+      var durchschnitt = gehaltfeld.value
+      var euro = null;
+      var stundenlohn = null;
+      stundenlohn = (3 * durchschnitt) / 13 / 40;
+      stundenlohn = Math.round(stundenlohn);
 
-var userLang = getFirstBrowserLanguage();
+      if (laenge.value !== "" && teilnehmer.value !== "") {
+        euro = stundenlohn * laenge.value * teilnehmer.value
+        zusammenfassung.textContent = zusammenfassung1 + teilnehmer.value + zusammenfassung2 + laenge.value + zusammenfassung3;
+        bierkostencount = Math.round((euro / teilnehmer.value) / bierkosten)
+        bierwert.textContent = bier1 + bierkostencount + bier2
+        myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + laenge.value + "&dgehalt=" + gehaltfeld.value + "&teilnehmer=" + teilnehmer.value
+      }
+      else {
+        euro = "0";
+      }
 
-const english=[
-["headline","How expensive was my Meeting?"],
-["subtitle1","This website calculates the meetings costs of your meeting based on the average income."],
-["subtitle2","The average income is set to 4000€ monthly in this program.</br><i>(German average approx. 3975€)</i>"],
-["gehalttitle","💶 Average monthly income of participants (gross)"],
-["laengetitle","<b>⏰ Meeting-Length</b>"],
-["teilnehmertitle","<b>👨‍💼👩‍💼 Participant count</b>"],
-["laenge","in hours (e.g. 1.7)"],
-["teilnehmer","integers"],
-["sharingtext","🤝 URL for sharing"]
-];
+      ergebniswert.textContent = eurocatext + " " + euro + " €";
 
-function set_language_en(){
-	english.forEach(element=>{
-	
-		var myelement=document.getElementById(element[0]);
-		console.log(myelement);
-		
-		if(myelement.nodeName === "P"){
-			myelement.innerHTML=element[1];
-		}
-		else if (myelement.nodeName === "INPUT"){
-			myelement.placeholder=element[1];
-		}
-		else if (myelement.nodeName === "H1"){
-			myelement.innerHTML=element[1];
-		}
-		else{
-		
-		}
-	}
-	);
-	
-	zusammenfassungdefaulttext="! Please insert values in the input fields above !"
-	eurocatext="e.g."
-	zusammenfassung1="Your meeting with "
-	zusammenfassung2=" participants in  "
-	zusammenfassung3=" hours cost:"
-	bier1="You could have spend this money on "
-	bier2=" beer for you and every participant 🍺"
-}
+    }
 
-var zusammenfassungdefaulttext="! Tragen sie oben Werte in die Felder ein !"
-var eurocatext="ca."
-var zusammenfassung1="Ihr Meeting mit "
-var zusammenfassung2=" Teilnehmern hat in "
-var zusammenfassung3=" Stunden folgende Kosten verursacht:"
-var bier1="Dafür hätten Sie jedem Teilnehmer und sich selbst ca. "
-var bier2=" Bier spendieren können 🍺"
+    zusammenfassung.textContent = zusammenfassungdefaulttext;
 
-if(!userLang.startsWith("de")){
-	set_language_en();
-}
-const laenge = document.getElementById("laenge");
-const myurl = document.getElementById("myurl");
-const meetingtext=document.getElementById("zusammenfassung");
-const teilnehmer = document.getElementById("teilnehmer");
-const gehaltfeld=document.getElementById("dgehalt");
-var durchschnitt = gehaltfeld.value;
-const ergebniswert= document.getElementById("ergebnis_wert");
+    update_uri();
 
-bierkosten=4;
-bierkostencount=0;
+    teilnehmer.addEventListener("input", update_uri);
+    laenge.addEventListener("input", update_uri);
+    gehaltfeld.addEventListener("input", update_uri);
 
-myurl.value=window.location.protocol +"//"+ window.location.hostname
-
-function update_uri(){
-
-	var durchschnitt = gehaltfeld.value
-	var euro=null;
-	var stundenlohn=null;
-	stundenlohn=(3*durchschnitt)/13/40;
-	stundenlohn=Math.round(stundenlohn);
-	
-	if (laenge.value !== "" && teilnehmer.value !== "") {
-		euro=stundenlohn*laenge.value*teilnehmer.value
-		zusammenfassung.textContent = zusammenfassung1+teilnehmer.value+zusammenfassung2+laenge.value+zusammenfassung3;
-		bierkostencount=Math.round((euro/teilnehmer.value)/bierkosten)
-		bierwert.textContent=bier1+bierkostencount+bier2
-		myurl.value=window.location.protocol +"//"+ window.location.hostname+"?&laenge="+laenge.value+"&dgehalt="+gehaltfeld.value+"&teilnehmer="+teilnehmer.value
-	}
-	else {
-		euro="0";
-	}
-	
-	ergebniswert.textContent =eurocatext+" "+ euro + " €";
-	
-}
-
-zusammenfassung.textContent = zusammenfassungdefaulttext;
-
-update_uri();
-
-teilnehmer.addEventListener("input", update_uri);
-laenge.addEventListener("input", update_uri);
-gehaltfeld.addEventListener("input", update_uri);
-
-</script>
+  </script>
 </body>
+
 </html>
