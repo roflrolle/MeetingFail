@@ -14,5 +14,5 @@ jobs:
         server: ssh.strato.de
         username: sftp_meeting@meeting.fail
         password: ${{ secrets.ftp_password }}
-        port: 22
         protocol: ftps
+        port: 22
