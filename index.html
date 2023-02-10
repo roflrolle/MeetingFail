@@ -217,16 +217,19 @@
       }
       );
 
-      zusammenfassungdefaulttext = "! Please insert values in the input fields above !"
+      zusammenfassungdefaulttext = '<div class="alert alert-dark" role="alert">Please insert values in the fields above</div>'
       eurocatext = "e.g."
       zusammenfassung1 = "Your meeting with "
       zusammenfassung2 = " participants in  "
       zusammenfassung3 = " hours cost:"
       bier1 = "You could have spend this money on "
       bier2 = " beer for you and every participant 🍺"
+      numbererror='<div class="alert alert-dark" role="alert">The fields are accepting only numbers (>0)</div>'
+    
     }
 
-    var zusammenfassungdefaulttext = "! Tragen sie oben Werte in die Felder ein !"
+    var zusammenfassungdefaulttext ='<div class="alert alert-dark" role="alert">Tragen sie oben Werte in die Felder ein</div>'
+    var numbererror='<div class="alert alert-dark" role="alert">Die Felder akzeptieren nur Zahlenwerte (>0)</div>'
     var eurocatext = "ca."
     var zusammenfassung1 = "Ihr Meeting mit "
     var zusammenfassung2 = " Teilnehmern hat in "
@@ -259,21 +262,31 @@
       stundenlohn = Math.round(stundenlohn);
 
       if (laenge.value !== "" && teilnehmer.value !== "") {
-        euro = stundenlohn * laenge.value * teilnehmer.value
-        zusammenfassung.textContent = zusammenfassung1 + teilnehmer.value + zusammenfassung2 + laenge.value + zusammenfassung3;
-        bierkostencount = Math.round((euro / teilnehmer.value) / bierkosten)
-        bierwert.textContent = bier1 + bierkostencount + bier2
-        myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + laenge.value + "&dgehalt=" + gehaltfeld.value + "&teilnehmer=" + teilnehmer.value
+        if(isNaN(laenge.value) || isNaN(teilnehmer.value) || (Math.sign(teilnehmer.value) !== 1)|| (Math.sign(laenge.value) !== 1)){
+          zusammenfassung.innerHTML = numbererror;
+          bierwert.textContent="";
+          myurl.value=""
+          euro = "0";
+        }
+        else{
+          euro = stundenlohn * laenge.value * teilnehmer.value
+          zusammenfassung.textContent = zusammenfassung1 + teilnehmer.value + zusammenfassung2 + laenge.value + zusammenfassung3;
+          bierkostencount = Math.round((euro / teilnehmer.value) / bierkosten)
+          bierwert.textContent = bier1 + bierkostencount + bier2
+          myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + laenge.value + "&dgehalt=" + gehaltfeld.value + "&teilnehmer=" + teilnehmer.value
+        }
       }
       else {
+        zusammenfassung.innerHTML = zusammenfassungdefaulttext;
+        bierwert.textContent="";
+        myurl.value=""
         euro = "0";
       }
 
       ergebniswert.textContent = eurocatext + " " + euro + " €";
-
     }
 
-    zusammenfassung.textContent = zusammenfassungdefaulttext;
+    zusammenfassung.innerHTML = zusammenfassungdefaulttext;
 
     update_uri();
 
