@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en">
 
@@ -69,7 +70,10 @@
       font-weight: 500;
       font-size: xx-large;
     }
-	.form-control:disabled, .form-control[readonly] {
+	td {
+  padding: 15px;
+}
+.form-control:disabled, .form-control[readonly] {
     background-color: var(--background-color);
 	color: var(--text-color);
 }
@@ -77,19 +81,16 @@
 </head>
 
 <body>
+	
   <header class="mt-4">
     <h1 itemprop="name" id="headline">meeting.fail 💬</h1>
   </header>
   <div id="container" class="container">
 
     <hr class="new1">
-
-    <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
-    <p id="subtitle2">Das Durchschnittsgehalt ist im Programm mit 4000€ brutto monatlich
-      festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
-
-    <hr class="new1">
-	
+	<table>
+	<tr>
+	<td>	
 	<p id="gehalttitle">💶 Durchschnittliches Monatsgehalt der Teilnehmer (brutto)</p>
 	
 	<div class="input-group 1">
@@ -101,7 +102,8 @@
 		</div>
 	</div>
 	
-	</br>
+	</td>
+	<td>
 	
 	<p id="laengetitle"><b>⏰ Meeting-Länge</b></p>
 	
@@ -114,7 +116,10 @@
 		</div>
 	</div>
 	
-	</br>
+	</td>
+	</tr>
+	<tr>
+	<td>
 
 	<p id="teilnehmertitle"><b>👨‍💼👩‍💼 Teilnehmeranzahl</b></p>
 	<div class="input-group 3">	
@@ -125,7 +130,29 @@
 			<span class="input-group-text" id="basic-addon2">N</span>
 		</div>
 	</div>
-		  
+	
+	</td>
+	<td>
+	<p id="biertitle"><b>🍺 Bierpreis</b></p>
+	<div class="input-group 4">	
+		<input class="form-control" type="number"
+			  id="bierpreis" value="4">
+			  
+		<div class="input-group-append">
+			<span class="input-group-text" id="basic-addon2">€</span>
+		</div>
+	</div>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2">
+    <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
+    <p id="subtitle2">Das Durchschnittsgehalt ist im Programm mit 4000€ brutto monatlich
+      festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
+	
+	</td>
+</tr>
+</table>	
     <hr class="new1">
 
     <div id="zusammenfassung">
@@ -224,7 +251,8 @@
       ["teilnehmertitle", "<b>👨‍💼👩‍💼 Participant count</b>"],
       ["laenge", "in hours (for example 1.7)"],
       ["teilnehmer", "integers"],
-      ["sharingtext", "🤝 URL for sharing"]
+      ["sharingtext", "🤝 URL for sharing"],
+	  ["biertitle","🍺 Beer price"]
     ];
 
     function set_language_en() {
@@ -279,7 +307,6 @@
     var durchschnitt = gehaltfeld.value;
     const ergebniswert = document.getElementById("ergebnis_wert");
 
-    bierkosten = 4;
     bierkostencount = 0;
 
     myurl.value = window.location.protocol + "//" + window.location.hostname
@@ -292,8 +319,8 @@
       stundenlohn = (3 * durchschnitt) / 13 / 40;
       stundenlohn = Math.round(stundenlohn);
 
-      if (laenge.value !== "" && teilnehmer.value !== "") {
-        if(isNaN(laenge.value) || isNaN(teilnehmer.value) || (Math.sign(teilnehmer.value) !== 1)|| (Math.sign(laenge.value) !== 1)){
+      if (laenge.value !== "" && teilnehmer.value !== "" && bierpreis.value !== "") {
+        if(isNaN(laenge.value) || isNaN(teilnehmer.value) || (Math.sign(teilnehmer.value) !== 1)|| (Math.sign(laenge.value) !== 1)|| (Math.sign(bierpreis.value) !== 1)){
           zusammenfassung.innerHTML = numbererror;
           bierwert.textContent="";
           myurl.value=""
@@ -302,7 +329,7 @@
         else{
           euro = stundenlohn * laenge.value * teilnehmer.value
           zusammenfassung.textContent = zusammenfassung1 + teilnehmer.value + zusammenfassung2 + laenge.value + zusammenfassung3;
-          bierkostencount = Math.round((euro / teilnehmer.value) / bierkosten)
+          bierkostencount = Math.round((euro / teilnehmer.value) / bierpreis.value)
           bierwert.textContent = bier1 + bierkostencount + bier2
           myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + laenge.value + "&dgehalt=" + gehaltfeld.value + "&teilnehmer=" + teilnehmer.value
         }
@@ -324,6 +351,7 @@
     teilnehmer.addEventListener("input", update_uri);
     laenge.addEventListener("input", update_uri);
     gehaltfeld.addEventListener("input", update_uri);
+	bierpreis.addEventListener("input", update_uri);
 
   </script>
 </body>
