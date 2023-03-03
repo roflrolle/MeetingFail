@@ -69,6 +69,10 @@
       font-weight: 500;
       font-size: xx-large;
     }
+	.form-control:disabled, .form-control[readonly] {
+    background-color: var(--background-color);
+	color: var(--text-color);
+}
   </style>
 </head>
 
@@ -134,7 +138,7 @@
 
     <hr class="new1">
 
-    <p id="sharingtext"><b>🤝 URL zum Teilen</b></p><input onClick="this.select();" class="form-control" type="search"
+    <p id="sharingtext"><b>🤝 URL zum Teilen</b></p><input readonly onClick="this.select();" class="form-control" type="search"
       id="myurl" placeholder="" autocomplete="off" spellcheck="false">
 
     <hr class="new1">
