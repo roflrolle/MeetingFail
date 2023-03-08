@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 
@@ -37,13 +35,11 @@
       }
     }
 
-    header {
-      text-align: center;
-    }
-
     h1 {
       font-size: 3em;
       font-weight: 700;
+	  text-align: center;
+	  margin-top: 5vw;
     }
 
     h2 {
@@ -88,9 +84,9 @@ width: 100%;
 
 <body>
 	
-  <header class="mt-4">
-    <h1 itemprop="name" id="headline">meeting.fail 💬</h1>
-  </header>
+
+	<h1 itemprop="name" id="headline">meeting.fail 💬</h1>
+
   <div id="container" class="container">
 
     <hr class="new1">
@@ -105,7 +101,7 @@ width: 100%;
 </tr>
 	<tr>
 	<td>	
-	<p id="gehalttitle">💶 Durchschnittliches Monatsgehalt der Teilnehmer (brutto)</p>
+	<p id="gehalttitle"><b>💶 Teilnehmer Durchschnittsgehalt</b></p>
 	
 	<div class="input-group 1">
 		<input value="4000"
@@ -252,7 +248,7 @@ width: 100%;
       ["headline", "meeting.fail 💬"],
       ["subtitle1", "This website calculates the meetings costs of your meeting based on the average income."],
       ["subtitle2", "The average income is set to 4000€ monthly in this program.</br><i>(German average ca. 3975€)</i>"],
-      ["gehalttitle", "💶 Average monthly income of participants (gross)"],
+      ["gehalttitle", "💶 Average monthly income of participants"],
       ["laengetitle", "<b>⏰ Meeting-Length</b>"],
       ["teilnehmertitle", "<b>👨‍💼👩‍💼 Participant count</b>"],
       ["laenge", "in hours (for example 1.7)"],
