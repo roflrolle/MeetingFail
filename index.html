@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -322,7 +323,7 @@ width: 100%;
       stundenlohn = Math.round(stundenlohn);
 
       if (laenge.value !== "" && teilnehmer.value !== "" && bierpreis.value !== "") {
-        if(isNaN(laenge.value) || isNaN(teilnehmer.value) || (Math.sign(teilnehmer.value) !== 1)|| (Math.sign(laenge.value) !== 1)|| (Math.sign(bierpreis.value) !== 1)){
+        if(isNaN(laenge.value) || isNaN(teilnehmer.value) || (Math.sign(gehaltfeld.value) !== 1)|| (Math.sign(teilnehmer.value) !== 1)|| (Math.sign(laenge.value) !== 1)|| (Math.sign(bierpreis.value) !== 1)){
           zusammenfassung.innerHTML = numbererror;
           bierwert.textContent="";
           myurl.value=""
