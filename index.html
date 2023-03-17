@@ -183,6 +183,17 @@ width: 100%;
   </div>
 
   <script>
+  
+	var num1="100.123";
+	var num2="1E+2";
+	var num3="1E";
+	var num4="abc";
+	
+	console.log(parseFloat(num1));
+	console.log(parseFloat(num2));
+	console.log(parseFloat(num3));
+	console.log(parseFloat(num4));
+	
     // Credits to https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
     function getFirstBrowserLanguage() {
       var nav = window.navigator,
@@ -316,7 +327,7 @@ width: 100%;
 
     function update_uri() {
 
-      var durchschnitt = gehaltfeld.value
+      var durchschnitt = parseFloat(gehaltfeld.value)
       var euro = null;
       var stundenlohn = null;
       stundenlohn = (3 * durchschnitt) / 13 / 40;
@@ -330,11 +341,11 @@ width: 100%;
           euro = "0";
         }
         else{
-          euro = stundenlohn * laenge.value * teilnehmer.value
-          zusammenfassung.textContent = zusammenfassung1 + teilnehmer.value + zusammenfassung2 + laenge.value + zusammenfassung3;
-          bierkostencount = Math.round((euro / teilnehmer.value) / bierpreis.value)
+          euro = parseFloat(stundenlohn) * parseFloat(laenge.value) * parseFloat(teilnehmer.value)
+          zusammenfassung.textContent = zusammenfassung1 + parseFloat(teilnehmer.value) + zusammenfassung2 + parseFloat(laenge.value) + zusammenfassung3;
+          bierkostencount = Math.floor((euro / parseFloat(teilnehmer.value)) / parseFloat(bierpreis.value))
           bierwert.textContent = bier1 + bierkostencount + bier2
-          myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + laenge.value + "&dgehalt=" + gehaltfeld.value + "&teilnehmer=" + teilnehmer.value
+          myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + parseFloat(laenge.value) + "&dgehalt=" + parseFloat(gehaltfeld.value) + "&teilnehmer=" + parseFloat(teilnehmer.value)
         }
       }
       else {
@@ -344,7 +355,7 @@ width: 100%;
         euro = "0";
       }
 
-      ergebniswert.textContent = eurocatext + " " + euro + " €";
+      ergebniswert.textContent = eurocatext + " " + Math.floor(euro) + " €";
     }
 
     zusammenfassung.innerHTML = zusammenfassungdefaulttext;
