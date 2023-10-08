@@ -11,23 +11,23 @@
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <style>
     [data-theme="dark"] {
-      --background-color: #282828;
+      --background-color: #121212;
       --text-color: #ffffff;
     }
 
     [data-theme="light"] {
       --background-color: #ffffff;
-      --text-color: #282828;
+      --text-color: #121212;
     }
 
     body {
-      margin-bottom: 50em;
+      margin-bottom: 5em;
       background-color: var(--background-color);
       color: var(--text-color);
     }
 
     hr.new1 {
-      border-top: 1px solid #b3b3b3;
+      border-top: 1px solid #03DAC6;
     }
 
     @media (min-width: 768px) {
@@ -63,9 +63,13 @@
     }
 
     #ergebnis_wert {
-      color: #4285f4;
+      color: #bb86fc;
       font-weight: 500;
       font-size: xx-large;
+    }
+
+    a {
+      color: #bb86fc;
     }
 	td {
   padding: 15px;
@@ -84,81 +88,75 @@ width: 100%;
 </head>
 
 <body>
-	
 
 	<h1 itemprop="name" id="headline">meeting.fail 💬</h1>
 
   <div id="container" class="container">
 
-    <hr class="new1">
+  <hr class="new1">
 	<table>
-	<tr>
-	<td colspan="2">
-    <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
-    <p id="subtitle2">Das Durchschnittsgehalt ist im Programm mit 4000€ brutto monatlich
-      festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
-	
-	</td>
-</tr>
-	<tr>
-	<td>	
-	<p id="gehalttitle"><b>💶 Teilnehmer Durchschnittsgehalt</b></p>
-	
-	<div class="input-group 1">
-		<input value="4000"
-		  class="form-control" type="number" id="dgehalt">
-		
-		<div class="input-group-append">
-			<span class="input-group-text" id="basic-addon2">€</span>
-		</div>
-	</div>
-	
-	</td>
-	<td>
-	
-	<p id="laengetitle"><b>⏰ Meeting-Länge</b></p>
-	
-	<div class="input-group 2">	
-		<input class="form-control" type="number" id="laenge"
-		  placeholder="In Stunden (bspw. 1.7)">
-		  
-		<div class="input-group-append">
-			<span class="input-group-text" id="basic-addon2">h</span>
-		</div>
-	</div>
-	
-	</td>
+    <tr>
+      <td colspan="2">
+        <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
+        <p id="subtitle2">Das <strong style='color:#bb86fc'>Durchschnittsgehalt</strong> ist im Programm mit <strong style='color:#bb86fc'>4000€</strong> brutto monatlich
+          festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
+      
+      </td>
+    </tr>
+    <tr>
+      <td>	
+        <p id="gehalttitle"><b>💶 Teilnehmer Durchschnittsgehalt</b></p>
+
+        <div class="input-group 1">
+          <input value="4000" class="form-control" type="number" id="dgehalt">
+
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">€</span>
+          </div>
+        </div>
+      </td>
+      <td>
+
+        <p id="laengetitle"><b>⏰ Meeting-Länge</b></p>
+
+        <div class="input-group 2">	
+          <input class="form-control" type="number" id="laenge" placeholder="In Stunden (bspw. 1.7)">
+
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">h</span>
+          </div>
+
+        </div>
+      </td>
 	</tr>
 	<tr>
-	<td>
+    <td>
 
-	<p id="teilnehmertitle"><b>👨‍💼👩‍💼 Teilnehmeranzahl</b></p>
-	<div class="input-group 3">	
-		<input class="form-control" type="number"
-			  id="teilnehmer" placeholder="Ganzzahlen">
-			  
-		<div class="input-group-append">
-			<span class="input-group-text" id="basic-addon2">N</span>
-		</div>
-	</div>
-	
-	</td>
-	<td>
-	<p id="biertitle"><b>🍺 Bierpreis</b></p>
-	<div class="input-group 4">	
-		<input class="form-control" type="number"
-			  id="bierpreis" value="4">
-			  
-		<div class="input-group-append">
-			<span class="input-group-text" id="basic-addon2">€</span>
-		</div>
-	</div>
-	</td>
+      <p id="teilnehmertitle"><b>👨‍💼👩‍💼 Teilnehmeranzahl</b></p>
+      <div class="input-group 3">	
+        <input class="form-control" type="number" id="teilnehmer" placeholder="Ganzzahlen">
+
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">N</span>
+        </div>
+      </div>
+    </td>
+    <td>
+      <p id="biertitle"><b>🍺 Bierpreis</b></p>
+      <div class="input-group 4">	
+        <input class="form-control" type="number" id="bierpreis" value="4">
+
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">€</span>
+        </div>
+      </div>
+    </td>
 	</tr>
 </table>	
     <hr class="new1">
 
     <div id="zusammenfassung">
+
     </div>
     <div id="ergebnis">
       <div id="ergebnis_wert">0 €</div>
@@ -177,8 +175,6 @@ width: 100%;
       <li>Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with ❤ & 🍺</li>
       <li><button type="button" class="btn btn-light" id="theme-switcher">☀ Light Mode</button></li>
     </ul>
-
-    <hr class="new1">
 
   </div>
 
@@ -282,11 +278,11 @@ width: 100%;
 
       zusammenfassungdefaulttext = '<div class="alert alert-dark" role="alert">Please insert values in the fields above</div>'
       eurocatext = "ca."
-      zusammenfassung1 = "Your meeting with "
-      zusammenfassung2 = " participants in  "
-      zusammenfassung3 = " hours cost:"
-      bier1 = "You could have spend this money on "
-      bier2 = " beer for you and every participant 🍺"
+      zusammenfassung1 = "Your meeting with <strong style='color:#bb86fc'>"
+      zusammenfassung2 = " </strong>participants in  <strong style='color:#bb86fc'>"
+      zusammenfassung3 = " </strong>hours cost:"
+      bier1 = "You could have spend this money on <strong style='color:#bb86fc'>"
+      bier2 = " </strong>beer for you and every participant 🍺"
       numbererror='<div class="alert alert-dark" role="alert">The fields are accepting only numbers (>0)</div>'
     
     }
@@ -294,11 +290,11 @@ width: 100%;
     var zusammenfassungdefaulttext ='<div class="alert alert-dark" role="alert">Tragen sie oben Werte in die Felder ein</div>'
     var numbererror='<div class="alert alert-dark" role="alert">Die Felder akzeptieren nur Zahlenwerte (>0)</div>'
     var eurocatext = "ca."
-    var zusammenfassung1 = "Ihr Meeting mit "
-    var zusammenfassung2 = " Teilnehmern hat in "
-    var zusammenfassung3 = " Stunden folgende Kosten verursacht:"
-    var bier1 = "Dafür hätten Sie jedem Teilnehmer und sich selbst ca. "
-    var bier2 = " Bier spendieren können 🍺"
+    var zusammenfassung1 = "Ihr Meeting mit <strong style='color:#bb86fc'> "
+    var zusammenfassung2 = " </strong>Teilnehmern hat in <strong style='color:#bb86fc'>"
+    var zusammenfassung3 = " </strong>Stunden folgende Kosten verursacht:"
+    var bier1 = "Dafür hätten Sie jedem Teilnehmer und sich selbst ca. <strong style='color:#bb86fc'>"
+    var bier2 = " </strong>Bier spendieren können 🍺"
 
     if (!userLang.startsWith("de")) {
       set_language_en();
@@ -333,9 +329,9 @@ width: 100%;
         }
         else{
           euro = parseFloat(stundenlohn) * parseFloat(laenge.value) * parseFloat(teilnehmer.value)
-          zusammenfassung.textContent = zusammenfassung1 + parseFloat(teilnehmer.value) + zusammenfassung2 + parseFloat(laenge.value) + zusammenfassung3;
+          zusammenfassung.innerHTML = zusammenfassung1 + parseFloat(teilnehmer.value) + zusammenfassung2 + parseFloat(laenge.value) + zusammenfassung3;
           bierkostencount = Math.floor((euro / parseFloat(teilnehmer.value)) / parseFloat(bierpreis.value))
-          bierwert.textContent = bier1 + bierkostencount + bier2
+          bierwert.innerHTML = bier1 + bierkostencount + bier2
           myurl.value = window.location.protocol + "//" + window.location.hostname + "?&laenge=" + parseFloat(laenge.value) + "&dgehalt=" + parseFloat(gehaltfeld.value) + "&teilnehmer=" + parseFloat(teilnehmer.value)+ "&bierpreis=" + parseFloat(bierpreis.value)
         }
       }
