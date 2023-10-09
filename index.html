@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -10,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <style>
+
     [data-theme="dark"] {
       --background-color: #181818;
       --text-color: #ffffff;
@@ -39,8 +39,8 @@
     h1 {
       font-size: 3em;
       font-weight: 700;
-	  text-align: center;
-	  margin-top: 5vw;
+	    text-align: center;
+	    margin-top: 5vw;
     }
 
     h2 {
@@ -71,36 +71,34 @@
     a {
       color: #bb86fc;
     }
-	td {
-  padding: 15px;
-}
-.form-control:disabled, .form-control[readonly] {
-    background-color: var(--background-color);
-	color: var(--text-color);
-}
 
-table {
-table-layout: auto;
-width: 100%;
+    td {
+    padding: 15px;
+    }
 
-}
+    .form-control:disabled, .form-control[readonly] {
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+
+    table {
+      table-layout: auto;
+      width: 100%;
+    }
   </style>
 </head>
 
 <body>
-
 	<h1 itemprop="name" id="headline">meeting.fail 💬</h1>
 
   <div id="container" class="container">
 
-  <hr class="new1">
 	<table>
     <tr>
       <td colspan="2">
         <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
         <p id="subtitle2">Das <strong style='color:#bb86fc'>Durchschnittsgehalt</strong> ist im Programm mit <strong style='color:#bb86fc'>4000€</strong> brutto monatlich
-          festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p>
-      
+          festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p> 
       </td>
     </tr>
     <tr>
@@ -115,8 +113,8 @@ width: 100%;
           </div>
         </div>
       </td>
-      <td>
 
+      <td>
         <p id="laengetitle"><b>⏰ Meeting-Länge</b></p>
 
         <div class="input-group 2">	
@@ -131,7 +129,6 @@ width: 100%;
 	</tr>
 	<tr>
     <td>
-
       <p id="teilnehmertitle"><b>👨‍💼👩‍💼 Teilnehmeranzahl</b></p>
       <div class="input-group 3">	
         <input class="form-control" type="number" id="teilnehmer" placeholder="Ganzzahlen">
@@ -153,10 +150,9 @@ width: 100%;
     </td>
 	</tr>
 </table>	
+
     <hr class="new1">
-
     <div id="zusammenfassung">
-
     </div>
     <div id="ergebnis">
       <div id="ergebnis_wert">0 €</div>
@@ -169,12 +165,12 @@ width: 100%;
     <p id="sharingtext"><b>🤝 URL zum Teilen</b></p><input readonly onClick="this.select();" class="form-control" type="search"
       id="myurl" placeholder="" autocomplete="off" spellcheck="false">
 
-    <hr class="new1">
-
-    <ul>
-      <li>Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with ❤ & 🍺</li>
-      <li><button type="button" class="btn btn-light" id="theme-switcher">☀ Light Mode</button></li>
-    </ul>
+    <p>
+      <ul>
+        <li>Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with ❤ & 🍺</li>
+        <li><button type="button" class="btn btn-light" id="theme-switcher">☀ Light Mode</button></li>
+      </ul>
+    </p>
 
   </div>
 
@@ -252,7 +248,7 @@ width: 100%;
       ["laenge", "in hours (for example 1.7)"],
       ["teilnehmer", "integers"],
       ["sharingtext", "🤝 URL for sharing"],
-	  ["biertitle","🍺 Beer price"]
+	    ["biertitle","🍺 Beer price"]
     ];
 
     function set_language_en() {
@@ -356,5 +352,4 @@ width: 100%;
 
   </script>
 </body>
-
 </html>
