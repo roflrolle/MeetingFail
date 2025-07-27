@@ -91,19 +91,23 @@
 <body>
 	<h1 itemprop="name" id="headline">meeting.fail 💬</h1>
 
+  <figure class="text-center">
+  <blockquote class="blockquote">
+    <p id="subtitle1"><small>Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</br>
+    Das <strong style='color:#bb86fc'>Durchschnittsgehalt</strong> ist im Programm mit <strong style='color:#bb86fc'>4000€</strong> brutto monatlich
+    festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></small></p> 
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    Dieses Meeting hätte <s>eine E-Mail</s> ein Bier sein können!
+  </figcaption>
+  </figure>
+
   <div id="container" class="container">
 
 	<table>
     <tr>
-      <td colspan="2">
-        <p id="subtitle1">Dieses Programm errechnet anhand des Durchschnittsgehalt die Kosten für ein Meeting.</p>
-        <p id="subtitle2">Das <strong style='color:#bb86fc'>Durchschnittsgehalt</strong> ist im Programm mit <strong style='color:#bb86fc'>4000€</strong> brutto monatlich
-          festgelegt.</br><i>(Bundesdurchschnitt bei ca. 3975€)</i></p> 
-      </td>
-    </tr>
-    <tr>
       <td>	
-        <p id="gehalttitle"><b>💶 Teilnehmer Durchschnittsgehalt</b></p>
+        <p id="gehalttitle"><b>💶 Durchschnittsgehalt der Teilnehmer</b></p>
 
         <div class="input-group 1">
           <input value="4000" class="form-control" type="number" id="dgehalt">
@@ -283,7 +287,7 @@
     
     }
 
-    var zusammenfassungdefaulttext ='<div class="alert alert-dark" role="alert">Tragen sie oben Werte in die Felder ein</div>'
+    var zusammenfassungdefaulttext ='<div class="alert alert-dark" role="alert">Die Berechnung startet sobald Werte eingetragen werden</div>'
     var numbererror='<div class="alert alert-dark" role="alert">Die Felder akzeptieren nur Zahlenwerte (>0)</div>'
     var eurocatext = "ca."
     var zusammenfassung1 = "Ihr Meeting mit <strong style='color:#bb86fc'> "
