@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Single Page Web Application</title>
+    <title>meeting.fail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Using Bulma CSS framework instead of Bootstrap -->
     <link
@@ -28,7 +28,7 @@
             <div class="field">
               <p class="control has-icons-left">
                 <input
-                  class="input"
+                  class="input is-rounded"
                   type="text"
                   placeholder="Gehalt"
                   value="4000"
@@ -42,7 +42,7 @@
             <div class="field">
               <p class="control has-icons-left">
                 <input
-                  class="input"
+                  class="input is-rounded"
                   type="text"
                   placeholder="Bierpreis"
                   value="4"
@@ -56,7 +56,7 @@
             <div class="field">
               <p class="control has-icons-left">
                 <input
-                  class="input"
+                  class="input is-rounded"
                   type="text"
                   placeholder="Dauer des Meetings (Std)"
                   id="laenge"
@@ -69,7 +69,7 @@
             <div class="field">
               <p class="control has-icons-left">
                 <input
-                  class="input"
+                  class="input is-rounded"
                   type="text"
                   placeholder="Teilnehmeranzahl"
                   id="teilnehmer"
@@ -83,11 +83,12 @@
         
         <p class="control has-icons-left">
           <input
-            class="input"
+            class="input is-rounded"
             type="text"
             placeholder="Sharing Link"
             id="myurl"
             readonly
+            onfocus="this.select()"
           />
           <span class="icon is-small is-left">
             <i class="fa-solid fa-link"></i>
