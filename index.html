@@ -1,115 +1,85 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>meeting.fail</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Using Bulma CSS framework instead of Bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-  </head>
-  <body>
-    <section class="section">
-      <p class="title is-1">
-        <span class="icon">
-          🗓️
-        </span>
-        &nbsp;&nbsp;&nbsp;meeting.fail
-      </p>
-      <div class="columns">
-        <div class="column">
-          <div class="container">
-            <div class="field">
-              <p class="control has-icons-left">
-                <input
-                  class="input is-rounded"
-                  type="text"
-                  placeholder="Gehalt"
-                  value="4000"
-                  id="dgehalt"
-                />
-                <span class="icon is-small is-left">
-                  💶
-                </span>
-              </p>
-            </div>
-            <div class="field">
-              <p class="control has-icons-left">
-                <input
-                  class="input is-rounded"
-                  type="text"
-                  placeholder="Bierpreis"
-                  value="4"
-                  id="bierpreis"
-                />
-                <span class="icon is-small is-left">
-                  🍺
-                </span>
-              </p>
-            </div>
-            <div class="field">
-              <p class="control has-icons-left">
-                <input
-                  class="input is-rounded"
-                  type="text"
-                  placeholder="Dauer des Meetings (Std)"
-                  id="laenge"
-                />
-                <span class="icon is-small is-left">
-                  🕖
-                </span>
-              </p>
-            </div>
-            <div class="field">
-              <p class="control has-icons-left">
-                <input
-                  class="input is-rounded"
-                  type="text"
-                  placeholder="Teilnehmeranzahl"
-                  id="teilnehmer"
-                />
-                <span class="icon is-small is-left">
-                  #️⃣
-                </span>
-              </p>
-            </div>
-            <div class="field">
-        
-        <p class="control has-icons-left">
-          <input
-            class="input is-rounded"
-            type="text"
-            placeholder="Sharing Link"
-            id="myurl"
-            readonly
-            onfocus="this.select()"
-          />
-          <span class="icon is-small is-left">
-            🔗
-          </span>
-        </p>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>meeting.fail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Using Bulma CSS framework instead of Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+
+<body>
+  <section class="section">
+    <p class="title is-1">
+      <span class="icon">
+        🗓️
+      </span>
+      &nbsp;&nbsp;&nbsp;meeting.fail
+    </p>
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <div class="container">
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Gehalt" value="4000" id="dgehalt" />
+              <span class="icon is-small is-left">
+                💶
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Bierpreis" value="4" id="bierpreis" />
+              <span class="icon is-small is-left">
+                🍺
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Dauer des Meetings (Std)" id="laenge" />
+              <span class="icon is-small is-left">
+                🕖
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Teilnehmeranzahl" id="teilnehmer" />
+              <span class="icon is-small is-left">
+                #️⃣
+              </span>
+            </p>
+          </div>
+          <div class="field">
+
+            <p class="control has-icons-left">
+              <input class="input is-rounded" type="text" placeholder="Sharing Link" id="myurl" readonly
+                onfocus="this.select()" />
+              <span class="icon is-small is-left">
+                🔗
+              </span>
+            </p>
           </div>
         </div>
-        <div class="column">
-          <div class="box">
-            <div class="icon-text">
+      </div>
+      <div class="column">
+        <div class="box">
+          <div class="icon-text">
             <span class="icon has-text-info">
               🙋‍♂️
             </span>
             <span>Erklärung</span>
           </div>
-            <p>
-              Dieses Programm errechnet anhand des Durchschnittsgehalt die
-              <b>Kosten für ein Meeting</b>. Das Durchschnittsgehalt ist im
-              Programm mit 4000€ brutto monatlich festgelegt.
-              (Bundesdurchschnitt bei ca. 3975€)
-            </p>
-          </div>
-          <div class="box">
+          <p>
+            Dieses Programm errechnet anhand des Durchschnittsgehalt die
+            <b>Kosten für ein Meeting</b>. Das Durchschnittsgehalt ist im
+            Programm mit 4000€ brutto monatlich festgelegt.
+            (Bundesdurchschnitt bei ca. 3975€)
+          </p>
+        </div>
+        <div class="box">
           <div class="icon-text">
             <span class="icon has-text-info">
               ℹ️
@@ -119,112 +89,115 @@
           <p id="zusammenfassung">
             <i>Nachdem die Werte eingegeben sind, beginnt die Berechnung</i>
           </p>
-        </div>
+
         </div>
       </div>
-      <div class="field">
-        <div class="icon-text">
-            <span class="icon is-small is-left">
-              <i class="fa-regular fa-copyright"></i>
+
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <span>2025 | Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with <span
+            class="icon-text">
+            <span class="icon">
+              ♥️
             </span>
-            <span>2025 | Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with <span class="icon-text">
-      <span class="icon">
-        ♥️
-      </span>
-      <span></span>
-    </span> & <span class="icon-text">
-      <span class="icon">
-        🍺
-      </span>
-      <span></span>
-    </span></span>
-          </div>
-      </div>
-    </section>
-  </body>
-  <script>
-    new URL(window.location.href).searchParams.forEach(
-      (x, y) => (document.getElementById(y).value = x)
-    );
+            <span></span>
+          </span> & <span class="icon-text">
+            <span class="icon">
+              🍺
+            </span>
+            <span></span>
+          </span></span>
+      </p>
+    </div>
+  </footer>
+</body>
+<script>
+  new URL(window.location.href).searchParams.forEach(
+    (x, y) => (document.getElementById(y).value = x)
+  );
 
-    const laenge = document.getElementById("laenge");
-    const myurl = document.getElementById("myurl");
-    const teilnehmer = document.getElementById("teilnehmer");
-    const gehaltfeld = document.getElementById("dgehalt");
-    const bierpreis = document.getElementById("bierpreis");
-    var durchschnitt = gehaltfeld.value;
+  const laenge = document.getElementById("laenge");
+  const myurl = document.getElementById("myurl");
+  const teilnehmer = document.getElementById("teilnehmer");
+  const gehaltfeld = document.getElementById("dgehalt");
+  const bierpreis = document.getElementById("bierpreis");
+  var durchschnitt = gehaltfeld.value;
 
-    bierkostencount = 0;
+  bierkostencount = 0;
 
-    myurl.value = window.location.protocol + "//" + window.location.hostname;
+  myurl.value = window.location.protocol + "//" + window.location.hostname;
 
-    function update_uri() {
-      var durchschnitt = parseFloat(gehaltfeld.value);
-      var euro = null;
-      var stundenlohn = null;
-      stundenlohn = (3 * durchschnitt) / 13 / 40;
-      stundenlohn = Math.round(stundenlohn);
+  function update_uri() {
+    var durchschnitt = parseFloat(gehaltfeld.value);
+    var euro = null;
+    var stundenlohn = null;
+    stundenlohn = (3 * durchschnitt) / 13 / 40;
+    stundenlohn = Math.round(stundenlohn);
 
+    if (
+      laenge.value !== "" &&
+      teilnehmer.value !== "" &&
+      bierpreis.value !== ""
+    ) {
       if (
-        laenge.value !== "" &&
-        teilnehmer.value !== "" &&
-        bierpreis.value !== ""
+        isNaN(laenge.value) ||
+        isNaN(teilnehmer.value) ||
+        Math.sign(gehaltfeld.value) !== 1 ||
+        Math.sign(teilnehmer.value) !== 1 ||
+        Math.sign(laenge.value) !== 1 ||
+        Math.sign(bierpreis.value) !== 1
       ) {
-        if (
-          isNaN(laenge.value) ||
-          isNaN(teilnehmer.value) ||
-          Math.sign(gehaltfeld.value) !== 1 ||
-          Math.sign(teilnehmer.value) !== 1 ||
-          Math.sign(laenge.value) !== 1 ||
-          Math.sign(bierpreis.value) !== 1
-        ) {
-          console.log("3: " + numbererror);
-          bierwert.textContent = "";
-          myurl.value = "";
-          euro = "0";
-        } else {
-          euro =
-            parseFloat(stundenlohn) *
-            parseFloat(laenge.value) *
-            parseFloat(teilnehmer.value);
-          bierkostencount = Math.floor(
-            euro / parseFloat(teilnehmer.value) / parseFloat(bierpreis.value)
-          );
-          console.log("1:" + bierkostencount);
-          zusammenfassung.innerHTML =
-            "Die Kosten für das Meeting betragen: <b>" +
-            Math.floor(euro) +
-            " €</b> (pro Teilnehmer: " +
-            Math.floor(euro / parseFloat(teilnehmer.value)) +
-            " €)</br> Dafür hätten sie jeder <b>" +
-            bierkostencount +
-            "</b> Bier trinken können.";
-          myurl.value =
-            window.location.protocol +
-            "//" +
-            window.location.hostname +
-            "?&laenge=" +
-            parseFloat(laenge.value) +
-            "&dgehalt=" +
-            parseFloat(gehaltfeld.value) +
-            "&teilnehmer=" +
-            parseFloat(teilnehmer.value) +
-            "&bierpreis=" +
-            parseFloat(bierpreis.value);
-        }
-      } else {
+        console.log("3: " + numbererror);
+        bierwert.textContent = "";
         myurl.value = "";
         euro = "0";
+      } else {
+        euro =
+          parseFloat(stundenlohn) *
+          parseFloat(laenge.value) *
+          parseFloat(teilnehmer.value);
+        bierkostencount = Math.floor(
+          euro / parseFloat(teilnehmer.value) / parseFloat(bierpreis.value)
+        );
+        console.log("1:" + bierkostencount);
+        zusammenfassung.innerHTML =
+          "Die Kosten für das Meeting betragen: <b>" +
+          Math.floor(euro) +
+          " €</b> (pro Teilnehmer: " +
+          Math.floor(euro / parseFloat(teilnehmer.value)) +
+          " €)</br> Dafür hätten sie jeder <b>" +
+          bierkostencount +
+          " Bier </b>trinken können.";
+        myurl.value =
+          window.location.protocol +
+          "//" +
+          window.location.hostname +
+          "?&laenge=" +
+          parseFloat(laenge.value) +
+          "&dgehalt=" +
+          parseFloat(gehaltfeld.value) +
+          "&teilnehmer=" +
+          parseFloat(teilnehmer.value) +
+          "&bierpreis=" +
+          parseFloat(bierpreis.value);
       }
-
-      console.log("2: " + Math.floor(euro) + " €");
+    } else {
+      myurl.value = "";
+      euro = "0";
     }
 
-    update_uri();
+    console.log("2: " + Math.floor(euro) + " €");
+  }
 
-    teilnehmer.addEventListener("input", update_uri);
-    laenge.addEventListener("input", update_uri);
-    gehaltfeld.addEventListener("input", update_uri);
-    bierpreis.addEventListener("input", update_uri);
-  </script>
+  update_uri();
+
+  teilnehmer.addEventListener("input", update_uri);
+  laenge.addEventListener("input", update_uri);
+  gehaltfeld.addEventListener("input", update_uri);
+  bierpreis.addEventListener("input", update_uri);
+</script>
+
 </html>
