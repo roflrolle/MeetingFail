@@ -164,13 +164,13 @@
         );
         console.log("1:" + bierkostencount);
         zusammenfassung.innerHTML =
-          "Die Kosten für das Meeting betragen: <b>" +
+          "Die Kosten für das Meeting betragen: <span class='tag is-primary is-medium'><b>" +
           Math.floor(euro) +
-          " €</b> (pro Teilnehmer: " +
+          " €</b></span> (pro Teilnehmer: " +
           Math.floor(euro / parseFloat(teilnehmer.value)) +
-          " €)</br> Dafür hätte jeder <b>" +
+          " €)</br> Dafür hätte <span class='tag is-primary is-medium'>jeder&nbsp;<b>" +
           bierkostencount +
-          " Bier </b>trinken können.";
+          " Bier </b></span> trinken können.";
         myurl.value =
           window.location.protocol +
           "//" +
