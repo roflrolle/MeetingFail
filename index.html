@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <title>meeting.fail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Using Bulma CSS framework instead of Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
 </head>
 
@@ -16,7 +15,7 @@
         🗓️
       </span>
       &nbsp;&nbsp;&nbsp;meeting.fail
-    </p>
+   </p>
     <div class="columns">
       <div class="column is-one-quarter">
         <div class="container">
@@ -70,7 +69,7 @@
             <span class="icon has-text-info">
               🙋‍♂️
             </span>
-            <span>Erklärung</span>
+            <span class="has-text-weight-semibold">Erklärung</span>
           </div>
           <p>
             Dieses Programm errechnet anhand des Durchschnittsgehalt die
@@ -84,7 +83,7 @@
             <span class="icon has-text-info">
               ℹ️
             </span>
-            <span>Information</span>
+            <span class="has-text-weight-semibold">Information</span>
           </div>
           <p id="zusammenfassung">
             <i>Nachdem die Werte eingegeben sind, beginnt die Berechnung</i>
@@ -164,7 +163,7 @@
         );
         console.log("1:" + bierkostencount);
         zusammenfassung.innerHTML =
-          "Die Kosten für das Meeting betragen: <span class='tag is-primary is-medium'><b>" +
+          "Die Kosten für das Meeting betragen: </br><span class='tag is-primary is-medium'><b>" +
           Math.floor(euro) +
           " €</b></span> (pro Teilnehmer: " +
           Math.floor(euro / parseFloat(teilnehmer.value)) +
