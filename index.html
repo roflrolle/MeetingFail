@@ -3,200 +3,287 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>meeting.fail</title>
+  <title>Meeting cost calculator | meeting.fail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <style>
+    :root {
+      --ink: #292a27;
+      --paper: #f4f2ec;
+      --accent: #7c8062;
+      --accent-dark: #4f543c;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .app-shell {
+      min-height: calc(100vh - 168px);
+    }
+
+    .brand-mark {
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark + .subtitle {
+      margin-left: 0.25rem;
+      margin-top: 0.75rem !important;
+    }
+
+    .intro {
+      max-width: 42rem;
+    }
+
+    .form-panel,
+    .result-panel,
+    .explanation-panel {
+      background: #fbfaf6;
+      border: 1px solid rgba(41, 42, 39, 0.12);
+      box-shadow: 0 0.75rem 2rem rgba(41, 42, 39, 0.06);
+    }
+
+    .result-panel {
+      border-top: 0.35rem solid var(--accent);
+    }
+
+    .result-value {
+      color: var(--accent-dark);
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1;
+    }
+
+    .result-empty {
+      color: #686961;
+    }
+
+    .button.is-link {
+      background-color: var(--accent-dark);
+    }
+
+    .button.is-link:hover,
+    .button.is-link:focus {
+      background-color: #3f432f;
+    }
+
+    .select:not(.is-multiple):not(.is-loading)::after {
+      border-color: var(--accent-dark);
+    }
+
+    .input:focus,
+    .select select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 0.125em rgba(124, 128, 98, 0.2);
+    }
+
+    .tag.is-warning {
+      background-color: #d8d8bd;
+      color: #3f432f;
+    }
+
+    .footer {
+      background: transparent;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <section class="section">
-    <p class="title is-1">
-      <span class="icon">
-        🗓️
-      </span>
-      &nbsp;&nbsp;&nbsp;meeting.fail
-   </p>
-    <div class="columns">
-      <div class="column is-one-quarter">
-        <div class="container">
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Gehalt" value="4000" id="dgehalt" />
-              <span class="icon is-small is-left">
-                💶
-              </span>
-            </p>
-          </div>
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Bierpreis" value="4" id="bierpreis" />
-              <span class="icon is-small is-left">
-                🍺
-              </span>
-            </p>
-          </div>
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Dauer des Meetings (Std)" id="laenge" />
-              <span class="icon is-small is-left">
-                🕖
-              </span>
-            </p>
-          </div>
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Teilnehmeranzahl" id="teilnehmer" />
-              <span class="icon is-small is-left">
-                #️⃣
-              </span>
-            </p>
-          </div>
-          <div class="field">
+  <main class="section app-shell">
+    <div class="container">
+      <header class="intro mb-6">
+        <p class="title is-2 brand-mark mb-3"><span class="icon">🗓️</span> meeting.fail</p>
+        <p class="subtitle is-5 mb-0">Was kostet dieses Meeting wirklich?</p>
+      </header>
 
-            <p class="control has-icons-left">
-              <input class="input is-rounded" type="text" placeholder="Sharing Link" id="myurl" readonly
-                onfocus="this.select()" />
-              <span class="icon is-small is-left">
-                🔗
-              </span>
+      <div class="columns is-variable is-6">
+        <section class="column is-5" aria-labelledby="inputs-title">
+          <div class="box form-panel">
+            <h1 id="inputs-title" class="title is-4">Meeting-Daten</h1>
+            <p class="help mb-5">Passe die Werte an, um die Kosten live zu berechnen.</p>
+
+            <div class="field">
+              <label class="label" for="dgehalt">Monatliches Bruttogehalt</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="number" inputmode="decimal" min="0" step="0.01" value="4000" id="dgehalt" />
+                <span class="icon is-small is-left">💶</span>
+                <span class="icon is-small is-right">€</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="getraenk">Getränk</label>
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth">
+                  <select id="getraenk">
+                    <option value="Bier" selected>Bier</option>
+                    <option value="Wasser">Wasser</option>
+                    <option value="Wein">Wein</option>
+                  </select>
+                </div>
+                <span class="icon is-small is-left" id="drink-icon">🍺</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="bierpreis">Preis pro Getränk</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="number" inputmode="decimal" min="0" step="0.01" value="4" id="bierpreis" />
+                <span class="icon is-small is-left" id="price-icon">🍺</span>
+                <span class="icon is-small is-right">€</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="laenge">Meetingdauer</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="number" inputmode="decimal" min="0" step="0.25" placeholder="z. B. 1,5" id="laenge" />
+                <span class="icon is-small is-left">🕖</span>
+                <span class="icon is-small is-right">Std.</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="teilnehmer">Anzahl der Teilnehmenden</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="number" inputmode="numeric" min="1" step="1" placeholder="z. B. 6" id="teilnehmer" />
+                <span class="icon is-small is-left">👥</span>
+                <span class="icon is-small is-right">Pers.</span>
+              </div>
+            </div>
+
+            <div class="field mb-0">
+              <label class="label" for="myurl">Share-Link</label>
+              <div class="field has-addons mb-0">
+                <div class="control is-expanded">
+                  <input class="input" type="url" id="myurl" readonly aria-label="Share-Link" />
+                </div>
+                <div class="control">
+                  <button class="button is-link" type="button" id="copy-link">Kopieren</button>
+                </div>
+              </div>
+              <p class="help" id="copy-status" aria-live="polite">Der Link wird aktualisiert, sobald alle Werte eingetragen sind.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="column" aria-labelledby="result-title">
+          <div class="box result-panel mb-5">
+            <p class="heading mb-2" id="result-title">Meetingkosten</p>
+            <p class="result-empty mb-4" id="result-empty">Trage Dauer und Teilnehmende ein, um die Kosten zu sehen.</p>
+            <div id="result-content" hidden>
+              <p class="result-value has-text-weight-bold mb-3" id="total-cost"></p>
+              <p class="subtitle is-5 mb-2" id="per-person"></p>
+              <p class="mb-0" id="beer-result"></p>
+            </div>
+          </div>
+
+          <div class="box explanation-panel">
+            <h2 class="title is-5">Wie wird gerechnet?</h2>
+            <p>
+              Die Berechnung verwendet das durchschnittliche Bruttogehalt von 4.000 € pro Monat
+              und zeigt, was die Arbeitszeit aller Teilnehmenden kostet.
             </p>
           </div>
-        </div>
+          <p class="help mt-4">Die Werte werden nur in diesem Browser verarbeitet.</p>
+        </section>
       </div>
-      <div class="column">
-        <div class="box">
-          <div class="icon-text">
-            <span class="icon has-text-info">
-              🙋‍♂️
-            </span>
-            <span class="has-text-weight-semibold">Erklärung</span>
-          </div>
-          <p>
-            Dieses Programm errechnet anhand des Durchschnittsgehalt die
-            <b>Kosten für ein Meeting</b>. Das Durchschnittsgehalt ist im
-            Programm mit 4000€ brutto monatlich festgelegt.
-            (Bundesdurchschnitt bei ca. 3975€)
-          </p>
-        </div>
-        <div class="box">
-          <div class="icon-text">
-            <span class="icon has-text-info">
-              ℹ️
-            </span>
-            <span class="has-text-weight-semibold">Information</span>
-          </div>
-          <p id="zusammenfassung">
-            <i>Nachdem die Werte eingegeben sind, beginnt die Berechnung</i>
-          </p>
-
-        </div>
-      </div>
-
     </div>
-  </section>
+  </main>
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <span>2025 | Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with <span
-            class="icon-text">
-            <span class="icon">
-              ♥️
-            </span>
-            <span></span>
-          </span> & <span class="icon-text">
-            <span class="icon">
-              🍺
-            </span>
-            <span></span>
-          </span></span>
+        <span><span id="current-year"></span> | Made by <a href="https://github.com/roflrolle/MeetingFail">roflrolle</a> with ♥️ & 🍺</span>
       </p>
     </div>
   </footer>
 </body>
 <script>
-  new URL(window.location.href).searchParams.forEach(
-    (x, y) => (document.getElementById(y).value = x)
-  );
-
   const laenge = document.getElementById("laenge");
   const myurl = document.getElementById("myurl");
   const teilnehmer = document.getElementById("teilnehmer");
   const gehaltfeld = document.getElementById("dgehalt");
   const bierpreis = document.getElementById("bierpreis");
-  var durchschnitt = gehaltfeld.value;
+  const getraenk = document.getElementById("getraenk");
+  const drinkIcon = document.getElementById("drink-icon");
+  const priceIcon = document.getElementById("price-icon");
+  const resultEmpty = document.getElementById("result-empty");
+  const resultContent = document.getElementById("result-content");
+  const totalCost = document.getElementById("total-cost");
+  const perPerson = document.getElementById("per-person");
+  const beerResult = document.getElementById("beer-result");
+  const copyLink = document.getElementById("copy-link");
+  const copyStatus = document.getElementById("copy-status");
 
-  bierkostencount = 0;
-
-  myurl.value = window.location.protocol + "//" + window.location.hostname;
+  new URL(window.location.href).searchParams.forEach((value, key) => {
+    const field = document.getElementById(key);
+    if (field) field.value = value;
+  });
 
   function update_uri() {
-    var durchschnitt = parseFloat(gehaltfeld.value);
-    var euro = null;
-    var stundenlohn = null;
-    stundenlohn = (3 * durchschnitt) / 13 / 40;
-    stundenlohn = Math.round(stundenlohn);
+    const salary = parseFloat(gehaltfeld.value);
+    const duration = parseFloat(laenge.value);
+    const participants = parseFloat(teilnehmer.value);
+    const beerPrice = parseFloat(bierpreis.value);
+    const drink = getraenk.value || "Bier";
+    const drinkDetails = {
+      Bier: { icon: "🍺", label: "Bier" },
+      Wasser: { icon: "💧", label: "Gläser Wasser" },
+      Wein: { icon: "🍷", label: "Gläser Wein" }
+    }[drink];
+    const valuesAreValid = [salary, duration, participants, beerPrice].every((value) => Number.isFinite(value) && value > 0);
 
-    if (
-      laenge.value !== "" &&
-      teilnehmer.value !== "" &&
-      bierpreis.value !== ""
-    ) {
-      if (
-        isNaN(laenge.value) ||
-        isNaN(teilnehmer.value) ||
-        Math.sign(gehaltfeld.value) !== 1 ||
-        Math.sign(teilnehmer.value) !== 1 ||
-        Math.sign(laenge.value) !== 1 ||
-        Math.sign(bierpreis.value) !== 1
-      ) {
-        console.log("3: " + numbererror);
-        bierwert.textContent = "";
-        myurl.value = "";
-        euro = "0";
-      } else {
-        euro =
-          parseFloat(stundenlohn) *
-          parseFloat(laenge.value) *
-          parseFloat(teilnehmer.value);
-        bierkostencount = Math.floor(
-          euro / parseFloat(teilnehmer.value) / parseFloat(bierpreis.value)
-        );
-        console.log("1:" + bierkostencount);
-        zusammenfassung.innerHTML =
-          "Die Kosten für das Meeting betragen: </br><span class='tag is-primary is-medium'><b>" +
-          Math.floor(euro) +
-          " €</b></span> (pro Teilnehmer: " +
-          Math.floor(euro / parseFloat(teilnehmer.value)) +
-          " €)</br> Dafür hätte <span class='tag is-primary is-medium'>jeder&nbsp;<b>" +
-          bierkostencount +
-          " Bier </b></span> trinken können.";
-        myurl.value =
-          window.location.protocol +
-          "//" +
-          window.location.hostname +
-          "?&laenge=" +
-          parseFloat(laenge.value) +
-          "&dgehalt=" +
-          parseFloat(gehaltfeld.value) +
-          "&teilnehmer=" +
-          parseFloat(teilnehmer.value) +
-          "&bierpreis=" +
-          parseFloat(bierpreis.value);
-      }
-    } else {
+    drinkIcon.textContent = drinkDetails.icon;
+    priceIcon.textContent = drinkDetails.icon;
+
+    if (!valuesAreValid) {
+      resultEmpty.hidden = false;
+      resultContent.hidden = true;
       myurl.value = "";
-      euro = "0";
+      copyStatus.textContent = "Der Link wird aktualisiert, sobald alle Werte eingetragen sind.";
+      return;
     }
 
-    console.log("2: " + Math.floor(euro) + " €");
+    const hourlyRate = Math.round((3 * salary) / 13 / 40);
+    const meetingCost = hourlyRate * duration * participants;
+    const drinksPerPerson = Math.floor(meetingCost / participants / beerPrice);
+
+    resultEmpty.hidden = true;
+    resultContent.hidden = false;
+    totalCost.textContent = `${Math.floor(meetingCost).toLocaleString("de-DE")} €`;
+    perPerson.textContent = `${Math.floor(meetingCost / participants).toLocaleString("de-DE")} € pro Person`;
+    beerResult.innerHTML = `Dafür hätte jede Person <strong class="tag is-warning is-medium">${drinksPerPerson} ${drinkDetails.label}</strong> trinken können.`;
+    myurl.value = `${window.location.href.split("?")[0]}?laenge=${duration}&dgehalt=${salary}&teilnehmer=${participants}&bierpreis=${beerPrice}&getraenk=${encodeURIComponent(drink)}`;
+    copyStatus.textContent = "Der Share-Link ist bereit.";
   }
 
+  copyLink.addEventListener("click", async () => {
+    if (!myurl.value) return;
+    try {
+      await navigator.clipboard.writeText(myurl.value);
+      copyStatus.textContent = "Link kopiert.";
+    } catch (error) {
+      myurl.select();
+      copyStatus.textContent = "Link ausgewählt. Kopiere ihn mit Strg+C.";
+    }
+  });
+
+  document.getElementById("current-year").textContent = new Date().getFullYear();
   update_uri();
 
   teilnehmer.addEventListener("input", update_uri);
   laenge.addEventListener("input", update_uri);
   gehaltfeld.addEventListener("input", update_uri);
   bierpreis.addEventListener("input", update_uri);
+  getraenk.addEventListener("change", update_uri);
 </script>
 
 </html>
