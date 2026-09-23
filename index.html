@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Meeting cost calculator | meeting.fail</title>
+  <title>Meetingkosten-Rechner | meeting.fail</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <style>
@@ -201,9 +201,8 @@
           </div>
         </section>
 
-        <section class="column" aria-labelledby="result-title">
+        <section class="column" aria-label="Meetingkosten-Ergebnis">
           <div class="box result-panel mb-5">
-            <p class="heading mb-2" id="result-title">Meetingkosten</p>
             <p class="result-empty mb-4" id="result-empty">Trage Dauer und Teilnehmende ein, um die Kosten zu sehen.</p>
             <div id="result-content" hidden>
               <article class="share-card" id="share-card" aria-label="Teilbare Zusammenfassung der Meetingkosten">
@@ -215,6 +214,7 @@
               </article>
               <div class="buttons mt-4 mb-0">
                 <button class="button is-link" type="button" id="copy-summary">Zusammenfassung kopieren</button>
+                <button class="button is-light" type="button" id="copy-card-image">Bild kopieren</button>
                 <button class="button is-light" type="button" id="download-card">Als Bild speichern</button>
               </div>
             </div>
@@ -257,6 +257,7 @@
   const meetingMeta = document.getElementById("meeting-meta");
   const copyLink = document.getElementById("copy-link");
   const copySummary = document.getElementById("copy-summary");
+  const copyCardImage = document.getElementById("copy-card-image");
   const downloadCard = document.getElementById("download-card");
   const copyStatus = document.getElementById("copy-status");
   const resetForm = document.getElementById("reset-form");
@@ -328,7 +329,7 @@
     }
   });
 
-  downloadCard.addEventListener("click", () => {
+  function createCardCanvas() {
     const canvas = document.createElement("canvas");
     canvas.width = 1200;
     canvas.height = 760;
@@ -364,6 +365,27 @@
     context.fillStyle = "#686961";
     context.font = "22px sans-serif";
     context.fillText("meeting.fail", 72, 675);
+    return canvas;
+  }
+
+  copyCardImage.addEventListener("click", async () => {
+    if (!navigator.clipboard || typeof ClipboardItem === "undefined") {
+      copyStatus.textContent = "Bildkopieren wird von diesem Browser nicht unterstützt.";
+      return;
+    }
+
+    try {
+      const canvas = createCardCanvas();
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      copyStatus.textContent = "Bild in die Zwischenablage kopiert.";
+    } catch (error) {
+      copyStatus.textContent = "Das Bild konnte nicht kopiert werden.";
+    }
+  });
+
+  downloadCard.addEventListener("click", () => {
+    const canvas = createCardCanvas();
     const link = document.createElement("a");
     link.download = "meeting-fail-result.png";
     link.href = canvas.toDataURL("image/png");
