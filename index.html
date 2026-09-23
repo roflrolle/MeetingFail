@@ -135,10 +135,11 @@
             <div class="field">
               <label class="label" for="dgehalt">Monatliches Bruttogehalt</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" inputmode="decimal" min="0" step="0.01" value="4000" id="dgehalt" />
+                <input class="input numeric-field" type="number" inputmode="decimal" min="0.01" step="0.01" value="4000" id="dgehalt" aria-describedby="dgehalt-error" />
                 <span class="icon is-small is-left">💶</span>
                 <span class="icon is-small is-right">€</span>
               </div>
+              <p class="help is-danger" id="dgehalt-error" hidden></p>
             </div>
 
             <div class="field">
@@ -158,28 +159,31 @@
             <div class="field">
               <label class="label" for="bierpreis">Preis pro Getränk</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" inputmode="decimal" min="0" step="0.01" value="4" id="bierpreis" />
+                <input class="input numeric-field" type="number" inputmode="decimal" min="0.01" step="0.01" value="4" id="bierpreis" aria-describedby="bierpreis-error" />
                 <span class="icon is-small is-left" id="price-icon">🍺</span>
                 <span class="icon is-small is-right">€</span>
               </div>
+              <p class="help is-danger" id="bierpreis-error" hidden></p>
             </div>
 
             <div class="field">
               <label class="label" for="laenge">Meetingdauer</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" inputmode="decimal" min="0" step="0.25" placeholder="z. B. 1,5" id="laenge" />
+                <input class="input numeric-field" type="text" inputmode="decimal" pattern="[0-9]+([,.][0-9]+)?" placeholder="z. B. 1,5" id="laenge" aria-describedby="laenge-error" />
                 <span class="icon is-small is-left">🕖</span>
                 <span class="icon is-small is-right">Std.</span>
               </div>
+              <p class="help is-danger" id="laenge-error" hidden></p>
             </div>
 
             <div class="field">
               <label class="label" for="teilnehmer">Anzahl der Teilnehmenden</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" inputmode="numeric" min="1" step="1" placeholder="z. B. 6" id="teilnehmer" />
+                <input class="input numeric-field" type="number" inputmode="numeric" min="1" step="1" placeholder="z. B. 6" id="teilnehmer" aria-describedby="teilnehmer-error" />
                 <span class="icon is-small is-left">👥</span>
                 <span class="icon is-small is-right">Pers.</span>
               </div>
+              <p class="help is-danger" id="teilnehmer-error" hidden></p>
             </div>
 
             <div class="field">
@@ -261,6 +265,8 @@
   const downloadCard = document.getElementById("download-card");
   const copyStatus = document.getElementById("copy-status");
   const resetForm = document.getElementById("reset-form");
+  const numericFields = [gehaltfeld, bierpreis, laenge, teilnehmer];
+  const touchedFields = new Set();
 
   new URL(window.location.href).searchParams.forEach((value, key) => {
     const field = document.getElementById(key);
@@ -278,7 +284,7 @@
       Wasser: { icon: "💧", label: "Gläser Wasser" },
       Wein: { icon: "🍷", label: "Gläser Wein" }
     }[drink];
-    const valuesAreValid = [salary, duration, participants, beerPrice].every((value) => Number.isFinite(value) && value > 0);
+    const valuesAreValid = numericFields.every((field) => validateField(field));
 
     drinkIcon.textContent = drinkDetails.icon;
     priceIcon.textContent = drinkDetails.icon;
@@ -304,6 +310,50 @@
     myurl.value = `${window.location.href.split("?")[0]}?laenge=${duration}&dgehalt=${salary}&teilnehmer=${participants}&bierpreis=${beerPrice}&getraenk=${encodeURIComponent(drink)}`;
     copyStatus.textContent = "Der Share-Link ist bereit.";
   }
+
+  function validateField(field) {
+    const value = field.value.trim();
+    let message = "";
+
+    if (value === "") {
+      message = "Bitte eine Zahl eingeben.";
+    } else if (!Number.isFinite(Number(value)) || Number(value) <= 0) {
+      message = "Bitte eine Zahl größer als 0 eingeben.";
+    }
+
+    const error = document.getElementById(`${field.id}-error`);
+    const showError = touchedFields.has(field) && message !== "";
+    field.classList.toggle("is-danger", showError);
+    field.setAttribute("aria-invalid", showError ? "true" : "false");
+    error.textContent = message;
+    error.hidden = !showError;
+    return message === "";
+  }
+
+  function sanitizeNumericField(field) {
+    const decimalAllowed = field !== teilnehmer;
+    let value = field.value.replace(/,/g, ".").replace(decimalAllowed ? /[^0-9.]/g : /[^0-9]/g, "");
+    if (decimalAllowed) {
+      const decimalIndex = value.indexOf(".");
+      if (decimalIndex !== -1) {
+        value = `${value.slice(0, decimalIndex + 1)}${value.slice(decimalIndex + 1).replace(/\./g, "")}`;
+      }
+    }
+    field.value = value;
+  }
+
+  numericFields.forEach((field) => {
+    field.addEventListener("keydown", (event) => {
+      if (["e", "E", "+", "-"].includes(event.key) || (field === teilnehmer && [".", ","].includes(event.key))) {
+        event.preventDefault();
+      }
+    });
+    field.addEventListener("input", () => {
+      touchedFields.add(field);
+      sanitizeNumericField(field);
+      update_uri();
+    });
+  });
 
   copyLink.addEventListener("click", async () => {
     if (!myurl.value) return;
@@ -398,6 +448,8 @@
     getraenk.value = "Bier";
     laenge.value = "";
     teilnehmer.value = "";
+    touchedFields.clear();
+    numericFields.forEach((field) => validateField(field));
     history.replaceState(null, "", window.location.pathname);
     update_uri();
   });
@@ -405,10 +457,6 @@
   document.getElementById("current-year").textContent = new Date().getFullYear();
   update_uri();
 
-  teilnehmer.addEventListener("input", update_uri);
-  laenge.addEventListener("input", update_uri);
-  gehaltfeld.addEventListener("input", update_uri);
-  bierpreis.addEventListener("input", update_uri);
   getraenk.addEventListener("change", update_uri);
 </script>
 
