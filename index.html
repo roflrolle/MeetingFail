@@ -60,6 +60,28 @@
       color: #686961;
     }
 
+    .share-card {
+      padding: 0.25rem 0 0;
+    }
+
+    .share-card-brand {
+      color: var(--accent-dark);
+      letter-spacing: 0.08em;
+    }
+
+    .share-card-cost {
+      color: var(--accent-dark);
+      font-size: clamp(2.75rem, 8vw, 4.5rem);
+      line-height: 1;
+    }
+
+    .share-card-meta {
+      border-top: 1px solid rgba(41, 42, 39, 0.14);
+      border-bottom: 1px solid rgba(41, 42, 39, 0.14);
+      color: #686961;
+      padding: 0.75rem 0;
+    }
+
     .button.is-link {
       background-color: var(--accent-dark);
     }
@@ -160,6 +182,10 @@
               </div>
             </div>
 
+            <div class="field">
+              <button class="button is-light is-fullwidth" type="button" id="reset-form">Zurücksetzen</button>
+            </div>
+
             <div class="field mb-0">
               <label class="label" for="myurl">Share-Link</label>
               <div class="field has-addons mb-0">
@@ -180,9 +206,17 @@
             <p class="heading mb-2" id="result-title">Meetingkosten</p>
             <p class="result-empty mb-4" id="result-empty">Trage Dauer und Teilnehmende ein, um die Kosten zu sehen.</p>
             <div id="result-content" hidden>
-              <p class="result-value has-text-weight-bold mb-3" id="total-cost"></p>
-              <p class="subtitle is-5 mb-2" id="per-person"></p>
-              <p class="mb-0" id="beer-result"></p>
+              <article class="share-card" id="share-card" aria-label="Teilbare Zusammenfassung der Meetingkosten">
+                <p class="is-size-7 has-text-weight-bold share-card-brand mb-4">MEETING.FAIL</p>
+                <p class="share-card-cost has-text-weight-bold mb-2" id="total-cost"></p>
+                <p class="subtitle is-5 mb-4" id="per-person"></p>
+                <p class="share-card-meta is-size-7 mb-4" id="meeting-meta"></p>
+                <p class="mb-0" id="beer-result"></p>
+              </article>
+              <div class="buttons mt-4 mb-0">
+                <button class="button is-link" type="button" id="copy-summary">Zusammenfassung kopieren</button>
+                <button class="button is-light" type="button" id="download-card">Als Bild speichern</button>
+              </div>
             </div>
           </div>
 
@@ -220,8 +254,12 @@
   const totalCost = document.getElementById("total-cost");
   const perPerson = document.getElementById("per-person");
   const beerResult = document.getElementById("beer-result");
+  const meetingMeta = document.getElementById("meeting-meta");
   const copyLink = document.getElementById("copy-link");
+  const copySummary = document.getElementById("copy-summary");
+  const downloadCard = document.getElementById("download-card");
   const copyStatus = document.getElementById("copy-status");
+  const resetForm = document.getElementById("reset-form");
 
   new URL(window.location.href).searchParams.forEach((value, key) => {
     const field = document.getElementById(key);
@@ -260,6 +298,7 @@
     resultContent.hidden = false;
     totalCost.textContent = `${Math.floor(meetingCost).toLocaleString("de-DE")} €`;
     perPerson.textContent = `${Math.floor(meetingCost / participants).toLocaleString("de-DE")} € pro Person`;
+    meetingMeta.textContent = `${duration.toLocaleString("de-DE")} Std. · ${participants.toLocaleString("de-DE")} Personen · ${beerPrice.toLocaleString("de-DE")} € pro ${drink}`;
     beerResult.innerHTML = `Dafür hätte jede Person <strong class="tag is-warning is-medium">${drinksPerPerson} ${drinkDetails.label}</strong> trinken können.`;
     myurl.value = `${window.location.href.split("?")[0]}?laenge=${duration}&dgehalt=${salary}&teilnehmer=${participants}&bierpreis=${beerPrice}&getraenk=${encodeURIComponent(drink)}`;
     copyStatus.textContent = "Der Share-Link ist bereit.";
@@ -274,6 +313,71 @@
       myurl.select();
       copyStatus.textContent = "Link ausgewählt. Kopiere ihn mit Strg+C.";
     }
+  });
+
+  function getSummaryText() {
+    return `${Math.floor(parseFloat(totalCost.textContent.replace(".", "").replace(" €", "")))} € Meetingkosten\n${perPerson.textContent}\n${meetingMeta.textContent}\nDafür hätte jede Person ${document.getElementById("beer-result").innerText.replace("Dafür hätte jede Person ", "").replace(" trinken können.", "")} trinken können.\n\nmeeting.fail`;
+  }
+
+  copySummary.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(getSummaryText());
+      copyStatus.textContent = "Zusammenfassung kopiert.";
+    } catch (error) {
+      copyStatus.textContent = "Die Zusammenfassung konnte nicht kopiert werden.";
+    }
+  });
+
+  downloadCard.addEventListener("click", () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1200;
+    canvas.height = 760;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "#f4f2ec";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "#7c8062";
+    context.fillRect(0, 0, 24, canvas.height);
+    context.fillStyle = "#4f543c";
+    context.font = "bold 26px sans-serif";
+    context.letterSpacing = "3px";
+    context.fillText("MEETING.FAIL", 72, 90);
+    context.fillStyle = "#686961";
+    context.font = "bold 22px sans-serif";
+    context.fillText("MEETINGKOSTEN", 72, 170);
+    context.fillStyle = "#4f543c";
+    context.font = "bold 86px sans-serif";
+    context.fillText(totalCost.textContent, 72, 285);
+    context.fillStyle = "#292a27";
+    context.font = "28px sans-serif";
+    context.fillText(perPerson.textContent, 72, 340);
+    context.strokeStyle = "#c8c8bd";
+    context.beginPath();
+    context.moveTo(72, 390);
+    context.lineTo(1128, 390);
+    context.stroke();
+    context.fillStyle = "#686961";
+    context.font = "24px sans-serif";
+    context.fillText(meetingMeta.textContent, 72, 445);
+    context.fillStyle = "#292a27";
+    context.font = "30px sans-serif";
+    context.fillText(document.getElementById("beer-result").innerText, 72, 535);
+    context.fillStyle = "#686961";
+    context.font = "22px sans-serif";
+    context.fillText("meeting.fail", 72, 675);
+    const link = document.createElement("a");
+    link.download = "meeting-fail-result.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+
+  resetForm.addEventListener("click", () => {
+    gehaltfeld.value = "4000";
+    bierpreis.value = "4";
+    getraenk.value = "Bier";
+    laenge.value = "";
+    teilnehmer.value = "";
+    history.replaceState(null, "", window.location.pathname);
+    update_uri();
   });
 
   document.getElementById("current-year").textContent = new Date().getFullYear();
